@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
+
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - mysql
+    command: >
+      sh -c "
+        until mysqladmin ping -h mysql --silent; do
+          echo 'Esperando a MySQL...';
+          sleep 2;
+        done;
+        npm run dev;
+      "
+    ports:
+      - "3000:3000"
+
+volumes:
+  mysql_data:

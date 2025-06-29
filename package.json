@@ -1,0 +1,19 @@
+{
+  "name": "semana13-sql-en-nodejs",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Giuliano Hillebrand",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.0.0",
+    "mysql2": "^3.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

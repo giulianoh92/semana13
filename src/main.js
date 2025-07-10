@@ -1,5 +1,5 @@
 // index.js
-const db = require('./db.js');
+import db from './db.js';
 
 
 async function pruebaConexion() {

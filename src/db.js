@@ -1,6 +1,7 @@
-require('dotenv').config(); // carga las variables de entorno desde el archivo .env
+import dotenv from 'dotenv';
+dotenv.config(); // carga las variables de entorno desde el archivo .env
 
-const mysql = require('mysql2/promise'); // importa el paquete mysql2
+import mysql from 'mysql2/promise'; // importa el paquete mysql2
 
 // crea un pool de conexiones a la base de datos usando las variables de entorno
 const pool = mysql.createPool({
@@ -11,4 +12,4 @@ const pool = mysql.createPool({
     connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT, 10) || 10 // establece un límite de conexiones
 });
 
-module.exports = pool; // exporta el pool de conexiones para que pueda ser utilizado en otros archivos
+export default pool; // exporta el pool de conexiones para que pueda ser utilizado en otros archivos
